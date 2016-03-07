@@ -1,14 +1,16 @@
 package com.basti.slidecardview;
 
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.basti.slidecardviewlib.SlideCardView;
+import com.basti.slidecardviewlib.SlideCardViewListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,10 +35,21 @@ public class MainActivity extends AppCompatActivity {
         slideCardView.addView(textView2);*/
         for (int i = 0;i<3;i++){
 
-            Button button = new Button(this);
+            /*Button button = new Button(this);
             button.setText("第"+ i +"个item");
-            slideCardView.addView(button);
+            slideCardView.addView(button);*/
+
+            View view = getLayoutInflater().inflate(R.layout.item,null,false);
+            slideCardView.addView(view);
+
         }
+
+        slideCardView.setSlideCardViewListener(new SlideCardViewListener() {
+            @Override
+            public void deleteFinished(int index, View childview) {
+                Log.i("index of delete View",index+"");
+            }
+        });
     }
 
     private void initView() {
